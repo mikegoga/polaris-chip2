@@ -14,7 +14,7 @@
       margin: 0;
       padding: 0;
       font-family: sans-serif;
-      background-color: #ededed;
+      background-color: #f55dd7;
     }
     polaris-chip {
       margin: 16px;
@@ -25,14 +25,55 @@
 
 <body>
   <h1>polaris-chip</h1>
-  <!-- this is going to do whatever the tag's defaults are -->
-  <polaris-chip title="News of Record" link="https://psu.edu/"></polaris-chip>
-  <polaris-chip title="Faculty and Staff"></polaris-chip>
-  <polaris-chip title="Sports are the only thing that matter"></polaris-chip>
-  <polaris-chip title="Grants and donations"></polaris-chip>
+  <my-card
+  title="Meet Eloise"
+  image="https://i.imgur.com/WJ9AYho.png"
+  alt="Eloise the cat"
+  subtitle="About Eloise:"
+  description="Eloise is a silver-shaded doll-face Persian cat."
+  href="https://en.wikipedia.org/wiki/Persian_cat"
+  buttonText="Show Me the Cats!"
+></my-card>
 
-  <h1>my-card</h1>
-  <my-card></my-card>
+<my-card
+  title="Meet Miu Miu"
+  image="https://imgur.com/AKbYnVg.png"
+  alt="Miu Miu the designer cat"
+  subtitle="Personality:"
+  description="Joined at the hip with her brother. Has a mean stare but is very loving."
+  href="https://www.catster.com/cat-breeds/persian-scottish-fold-cat-mix/"
+  buttonText="Learn More"
+></my-card>
+
+<my-card
+  title="Meet Louis"
+  image="https://imgur.com/oqFxl8q.png"
+  alt="Sibling of Miu Miu"
+  subtitle="Fun fact:"
+  description="Louis won the gene pool with the long persian hair and folded Scottish ears."
+  href="https://dollfacepersiankittens.com/persian-fold-kittens/"
+  buttonText="Cat Wiki"
+></my-card>
+
+<my-card
+  title="Meet Chai"
+  image="https://imgur.com/bnqOpCx.png"
+  alt="Chai the Ragdoll"
+  subtitle="Favorite activity:"
+  description="Antagonizing her two older siblings and looking perfect while doing so."
+  href="https://en.wikipedia.org/wiki/Ragdoll"
+  buttonText="About Ragdolls"
+></my-card>
+
+<my-card
+  title="Meet Luna"
+  image="https://imgur.com/gCuXZF5.png"
+  subtitle="Story:"
+  description="Luna is curious and loves people."
+  href="https://www.petfinder.com"
+  buttonText="Find Pets"
+></my-card>
+
 
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
