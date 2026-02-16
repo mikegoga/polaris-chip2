@@ -21,12 +21,19 @@ export class MyCard extends LitElement {
     this.description = 'This is Eloise, a pure-bred doll faced persian cat with silver shading.';
     this.href = 'https://hax.psu.edu';
     this.buttonText = 'Show Me the Cats!';
+    this.fancy = false;
   }
 
   static get styles() {
     return css`
       :host {
-        display: block;
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      :host([fancy]) .card{
+        border: 2px solid black;
+        box-shadow: 10px 5px 5px black;
       }
 
       .card {
@@ -38,15 +45,7 @@ export class MyCard extends LitElement {
         background-color: pink;
         display: inline-block;
         box-sizing: border-box;
-        transition: transform 120ms ease-in-out;
-      }
-
-      :host([active]) .card,
-      .card:hover,
-      .card:focus-within {
-        transform: scale(1.02);
-        outline: 2px solid black;
-        outline-offset: 3px;
+        transition: transform 600ms ease-in-out;
       }
 
       .card__body {
@@ -70,59 +69,90 @@ export class MyCard extends LitElement {
         margin: 0 0 10px 0;
       }
 
-      .card__desc {
-        margin: 0 0 10px 0;
+      .desc-area {
+        height: 90px;             
+        margin-bottom: 5px;
+      }
+
+      .desc-area details {
+        height: 100%;
+      }
+
+      .desc-area summary {
+        cursor: pointer;
+        user-select: none;
+        margin: 0;
+      }
+
+      .desc-area details:not([open]) .details-scroll {
+        visibility: hidden;
       }
 
       .btn {
-        margin: 0 0 0 115px;
         padding: 10px 10px;
         background: #89eefa;
         color: black;
         border: 2px solid black;
-        display: none; 
         cursor: pointer;
       }
 
       .btn:hover {
         background-color: grey;
+      } 
+
+      .details {
+        margin-top: 8px;
+      } 
+
+      .details-scroll {
+       line-height: 1.4em;          
+       max-height: 2.4em;         
+       overflow-y: auto;           
+       overflow-x: hidden;
+       padding-right: 6px;
+       box-sizing: border-box;
+      }
+      
+      .details-scroll ::slotted(*) {
+        margin: 0;
       }
 
-      @media (min-width: 500px) and (max-width: 800px) {
-        .btn {
-          display: inline-block;
-        }
-      }
-
-      @media (max-width: 499px) {
-        .card {
-          max-width: 300px;
-        }
-        .card-img {
-          height: 300px;
-        }
-      }
     `;
   }
 
   render() {
   return html`
     <div class="card">
-      <div class="card__body">
+      <div class="card__body" style="background-color: ${this.backgroundcolor}">
         <h2 class="card__title">${this.title}</h2>
-
         <img class="card-img" src="${this.image}" alt="${this.alt}" />
-
         <h4 class="sub-heading">${this.subtitle}</h4>
+        <div class="desc-area">
+          <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+            <summary>Description</summary>
 
-        <p class="card__desc">${this.description}</p>
-
-        <a href="${this.href}" target="_blank" rel="noopener">
-          <button class="btn">${this.buttonText}</button>
+            <div class="details-scroll">
+              <slot>${this.description}</slot>
+            </div>
+          </details>
+        </div>
+        <a href="${this.href}" class="btn" target="_blank" rel="noopener">
+          ${this.buttonText}
         </a>
       </div>
     </div>
   `;
+}
+
+// put this anywhere on the MyCard class; just above render() is probably good
+openChanged(e) {
+  console.log(e);
+  if (e.target.getAttribute('open') !== null) {
+    this.fancy = true;
+  }
+  else {
+    this.fancy = false;
+  }
 }
 
   static get properties() {
@@ -134,6 +164,7 @@ export class MyCard extends LitElement {
       description: { type: String },
       href: { type: String },
       buttonText: { type: String },
+      fancy: { type: Boolean, reflect: true }
     };
   }
 }
